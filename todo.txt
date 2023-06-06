@@ -1,0 +1,22 @@
+Omskiv alt Bank til Unireview
+
+Omskiv HTML filer I templates eller lav nye Andreas M
+gør coustermer til student, ignorer employee
+
+
+Til Andreas Konge SQL
+Lav nye SQL filer efter ER diagram
+Lav dummy database (3 universiteter og 6 studerende)
+
+Gør så man fra python kan logge ind som studerende (genbrug kode)
+Gør så man fra python kan skive et review (string) med en rating
+Når et nyt review bliver lavet opdater universitets rating
+En Quarry der giver alle review fra et universitet samt dets rating som kan kaldes fra python 
+
+
+Omskiv SQL commandoer i models.py
+
+
+til sidst
+Omskiv README 
+Opdater Requrement
