@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+  <!--
     <h1>{{ current_user.name }}</h1>
     {% for post in posts %}
         <article class="media content-section">
@@ -13,4 +14,14 @@
           </div>
         </article>
     {% endfor %}
+      -->
+    <h3>Select University</h3>
+    <form action="/University" method="post">
+      <select name="selected-Uni">
+          {% for item in uni_list %}
+              <option value="{{ item }}">{{ item }}</option>
+          {% endfor %}
+      </select>
+      <input type="submit" value="Submit">
+  </form>
 {% endblock content %}

@@ -9,13 +9,11 @@ from bank import roles, mysession
 
 Login = Blueprint('Login', __name__)
 
-#Put uni reviews here ARM
 posts = [{}]
 
-uni_list=["Uni1","Uni2"]
 
-@Login.route("/", methods=['GET', 'POST'])
-@Login.route("/home", methods=['GET', 'POST'])
+@Login.route("/")
+@Login.route("/home")
 def home():
     #202212
     mysession["state"]="home or /"
@@ -23,23 +21,8 @@ def home():
     #202212
     role =  mysession["role"]
     print('role: '+ role)
-    """
-    selected_item = None
-    if request.method == "POST":
-        selected_item = request.form.get('selected-Uni')
-        #ARM Query database for reviews of selected uni
-        posts=[{"uni":selected_item,"review":"review1"},{"uni":selected_item,"review":"review2"}]
-    """
-    return render_template('home.html', posts=posts, role=role,uni_list=uni_list)
 
-#ARM Select uni
-@app.route('/University', methods=['POST'])
-def select_item():
-    selected_item = request.form.get('selected-item')
-    print(selected_item)
-    # Now you can do something with selected_item
-    posts=[{"title": "This sucs"},{"title": "This sucs"}]
-    return render_template('university.html', name=selected_item, posts=posts)
+    return render_template('home.html', posts=posts, role=role)
 
 
 @Login.route("/about")
