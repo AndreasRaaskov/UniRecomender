@@ -1,6 +1,25 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField,SelectMultipleField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
+
+
+class UniversityForm(FlaskForm):
+    select = SelectMultipleField('Select Universtity'  , choices=["Uni1","Uni2","Uni3"], validators=[DataRequired()])
+    #select = SelectField('From Account:'  , choices=[], coerce = int, validators=[DataRequired()])
+    submit = SubmitField('Select')
+
+class ReviewForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = StringField('Content', validators=[DataRequired()])
+    score = IntegerField('Score', validators=[DataRequired()])
+    submit = SubmitField('Post')
+
+class LoginForm(FlaskForm):
+    id = StringField('UserName', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
+
 class AddCustomerForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])

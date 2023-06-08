@@ -15,13 +15,26 @@
         </article>
     {% endfor %}
       -->
-    <h3>Select University</h3>
-    <form action="/University" method="post">
+    
+    <form action="/university" method="post">
+      <!--
       <select name="selected-Uni">
-          {% for item in uni_list %}
-              <option value="{{ item }}">{{ item }}</option>
+          {% for form in posts %}
+              <option value="{{ item }}">{{ form.name }}</option>
           {% endfor %}
+      
       </select>
       <input type="submit" value="Submit">
+    -->
+    
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.select.label }}<br>
+            {{ form.select }}
+        </p>
+        {{ form.submit() }}
+    </form>
+  
   </form>
 {% endblock content %}

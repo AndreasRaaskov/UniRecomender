@@ -22,6 +22,7 @@ def home():
     role =  mysession["role"]
     print('role: '+ role)
 
+
     return render_template('home.html', posts=posts, role=role)
 
 
