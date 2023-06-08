@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'fc089b9218301ad987914c53481bff04'
 
-# set your own database
+# set your own 
 #db = "dbname='bank' user='postgres' host='127.0.0.1' password = 'UIS'"
 db = "dbname='bank23010' user='postgres' host='127.0.0.1' password = '1234'"
 conn = psycopg2.connect(db)
