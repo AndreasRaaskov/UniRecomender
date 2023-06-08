@@ -11,16 +11,16 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
     {% if title %}
-        <title>UIS Uni review - {{ title }}</title>
+        <title>UIS Prototype - {{ title }}</title>
     {% else %}
-        <title>UIS Uni review</title>
+        <title>UIS Prototype</title>
     {% endif %}
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">Uni review</a>
+          <a class="navbar-brand mr-4" href="/">UIS Prototype</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -82,22 +82,40 @@
           {% block content %}{% endblock %}
         </div>
         <!-- Right Side box-->
-        <!--
         <div class="col-md-4">
           <div class="content-section">
             <h3>Select University</h3>
-            <form method="POST" action="">
-              <select name="selected-Uni">
-                  {% for item in uni_list %}
-                      <option value="{{ item }}">{{ item }}</option>
-                  {% endfor %}
-              </select>
-              <input type="submit" value="Submit">
-          </form>
-      
+              <ul class="list-group">
+              {% if current_user.is_authenticated %}
+
+			   {% if "customer" == role %}
+			        <p>UIS Prototype-customer</p>
+                <li class="list-group-item list-group-item-light">Accounts</li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" href="{{ url_for('Customer.transfer') }}">Transfer</a></li>
+                <li class="list-group-item list-group-item-light">Checking Accounts</li>
+                <li class="list-group-item list-group-item-light">Investment Accounts</li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" href="{{ url_for('Customer.invest') }}">View investment accounts</a></li>
+ 			   {% endif %}
+
+
+			      {% if role == 'employee' %}
+			        <p>UIS Prototype-emp</p>
+                <li class="list-group-item list-group-item-light">Accounts</li>
+                <li class="list-group-item list-group-item-light">Transfer</li>
+                <li class="list-group-item list-group-item-light">Checking Accounts</li>
+                <li class="list-group-item list-group-item-light">Investment Accounts</li>
+                <li class="list-group-item list-group-item-light"><a class="nav-item nav-link" href="{{ url_for('Employee.investe') }}">View investment accounts</a></li>
+ 			      {% endif %}
+
+
+               <li class="list-group-item list-group-item-light">etc</li>
+
+              {% else %}
+                <li class="list-group-item list-group-item-light">etc</li>
+              {% endif %}
+              </ul>
             </p>
           </div>
-          -->
         </div>
       </div>
     </main>
