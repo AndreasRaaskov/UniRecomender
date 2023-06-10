@@ -6,12 +6,20 @@ from bank.models import Customers, Users, select_Customers, select_Employees,sel
 from bank.models import select_cus_accounts
 #202212
 from bank import roles, mysession
+import psycopg2
 
 Login = Blueprint('Login', __name__)
 
 #Put uni reviews here ARM
 posts = [{}]
 
+def get_db_connection():
+    conn = psycopg2.connect(host='localhost',
+                            database='unirecommender',
+                            user='postgres',
+                            password='1234')
+    return conn
+    #202212
 
 @Login.route("/", methods=['GET', 'POST'])
 @Login.route("/home", methods=['GET', 'POST'])
@@ -33,7 +41,7 @@ def show_uni():
     university = request.form.get('select')
     print(university)
     
-    user_login = mysession["role"]
+    user_login = None
     form = ReviewForm()
 
     #TODO Put new review in DB
@@ -50,7 +58,7 @@ def show_uni():
     #TODO Find rating in DB
     rating = 4
 
-    if mysession["state"] = "loguit": 
+    if user_login == None: 
         flash('Login in order to post a review','danger')
    
    
@@ -78,14 +86,19 @@ def about():
 
 @Login.route("/login", methods=['GET', 'POST'])
 def login():
-
+    def get_db_connection():
+        conn = psycopg2.connect(host='localhost',
+                                database='unirecommender',
+                                user='postgres',
+                                password='1234')
+        return conn
     #202212
     mysession["state"]="login"
     print(mysession)
     role=None
 
     if current_user.is_authenticated:
-        return redirect(url_for('Login.home'))
+        return redirect(url_for('Log in.home'))
 
     
     form = LoginForm()
@@ -111,7 +124,7 @@ def login():
             login_user(user, remember=form.remember.data)
             flash('Login successful.','success')
             next_page = request.args.get('next')
-
+            user_login  = user
             return redirect(next_page) if next_page else redirect(url_for('Login.home'))
         else:
             flash('Login Unsuccessful. Please check identifier and password', 'danger')
@@ -138,7 +151,7 @@ def logout():
 @Login.route("/account")
 @login_required
 def account():
-     ["state"]="account"
+    mysession["state"]="account"
     print(mysession)
     role =  mysession["role"]
     print('role: '+ role)
