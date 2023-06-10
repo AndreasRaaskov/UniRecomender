@@ -1,3 +1,4 @@
+
 CREATE TABLE IF NOT EXISTS Users(
     id INTEGER PRIMARY KEY,
     username VARCHAR (60) UNIQUE,
@@ -15,12 +16,13 @@ CREATE TABLE IF NOT EXISTS Reviews(
     id INTEGER PRIMARY KEY,
     rating integer NOT NULL CHECK (rating BETWEEN 1 AND 5),
     comment varchar(500),
-    votes_no INTEGER DEFAULT 0
+    votes_no INTEGER DEFAULT 0,
+    title VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS gave_review (
     review_id INTEGER NOT NULL REFERENCES Reviews(id),
-    user_id INTEGER NOT NULL REFERENCES Users(id) on delete CASCADE
+    user_id INTEGER NOT NULL REFERENCES Users(id) ON DELETE CASCADE
 );
 ALTER TABLE gave_review ADD CONSTRAINT gr_01
     FOREIGN KEY (review_id) REFERENCES Reviews (id) ON DELETE CASCADE

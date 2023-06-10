@@ -60,7 +60,7 @@ def login():
         # eller om det er et customer login.
         # betinget tildeling. Enten en employee - eller en customer instantieret
         # Skal muligvis laves om. Hvad hvis nu user ikke blir instantieret
-        user = select_Employees(form.id.data) if is_employee else select_Customers(form.id.data)
+        user =  select_Customers(form.id.data)
 
         # Derefter tjek om hashet af adgangskoden passer med det fra databasen...
         # Her checkes om der er logget på
