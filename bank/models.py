@@ -8,11 +8,8 @@ from psycopg2 import sql
 def load_user(user_id):
     cur = conn.cursor()
 
-    schema = 'customers'
-    id = 'cpr_number'
-    if str(user_id).startswith('60'):
-        schema = 'employees'
-        id = 'id'
+    schema = 'users'
+    id = 'id'
 
     user_sql = sql.SQL("""
     SELECT * FROM {}
@@ -27,10 +24,21 @@ def load_user(user_id):
     		# else:
     		#   return Customers(cur.fetchone())
 
-        return Employees(cur.fetchone()) if schema == 'employees' else Customers(cur.fetchone())
+        return Users(cur.fetchone()) 
     else:
         return None
 
+
+class Users(tuple, UserMixin):
+    def __init__(self, user_data):
+        self.id = user_data[0]
+        self.username = user_data[1]
+        self.email = user_data[2]
+        self.password = user_data[3]
+        self.role = "user"
+
+    def get_id(self):
+       return (self.id)
 
 class Customers(tuple, UserMixin):
     def __init__(self, user_data):
@@ -93,6 +101,17 @@ def select_Customers(CPR_number):
     """
     cur.execute(sql, (CPR_number,))
     user = Customers(cur.fetchone()) if cur.rowcount > 0 else None;
+    cur.close()
+    return user
+
+def select_Users(email):
+    cur = conn.cursor()
+    sql = """
+    SELECT * FROM Users
+    WHERE email = %s
+    """
+    cur.execute(sql, (email,))
+    user = Users(cur.fetchone()) if cur.rowcount > 0 else None;
     cur.close()
     return user
 
