@@ -2,16 +2,11 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from bank import app, conn, bcrypt
 from bank.forms import CustomerLoginForm, EmployeeLoginForm, UniversityForm, ReviewForm,LoginForm
 from flask_login import login_user, current_user, logout_user, login_required
-from bank.models import Customers, Users, select_Customers, select_Employees,select_Users, get_unis
-from bank.models import select_cus_accounts
+from bank.models import select_Users, get_unis
 import psycopg2
 #202212
 from bank import roles, mysession
 from flask_login import current_user
-
-
-
-
 
 Login = Blueprint('Login', __name__)
 
@@ -30,7 +25,6 @@ def home():
     #202212
     role =  mysession["role"]
     print('role: '+ role)
-    unis = get_unis
     form = UniversityForm()
 
     return render_template('home.html', form=form, posts=posts, role=role)

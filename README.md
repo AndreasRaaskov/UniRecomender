@@ -1,7 +1,4 @@
 # usage
-The UIS_prototype is a website running Python and Flask library. It has evolved as an unfinished project with development flaws and serves as a starting point for adopting flask as a means of making your own prototype.
-The schema of the database is banking and transfer of money between accounts, offering two roles, the employee role managing customer accounts and the customer role offering a customer login to customer accounts.
-The Flask framework extends html with a { } - command set. SQL Datasets can be listed using loops and branching statements.
 
 ## Requirements:
 Run the code below to install the necessary modules.
