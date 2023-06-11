@@ -102,19 +102,10 @@ def login():
 
     
     if form.validate_on_submit():
-
-        #"202212"
+        # select users i model.py finder user baseret på email, dette kan ændres efter ønske
         user = select_Users(form.id.data)
 
-        conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute('SELECT user_password FROM users WHERE username = \'bigdawg\'')
-        user_password = cur.fetchall()[0]
-
-
-        # Skal tjekke om password er korrekt; Skal forbinde front-end og database
-        print(user)
-        print(form.password.data)
+        # tjek om 4. felt i user er lig form.password
         if user != None and user[3] == form.password.data:
 
             #202212
@@ -148,9 +139,9 @@ def login():
 
 def get_db_connection():
     conn = psycopg2.connect(host='localhost',
-                            database='postgres',
+                            database='unirecommender',
                             user='postgres',
-                            password='Skye12345')
+                            password='1234')
     return conn
 
 @Login.route("/logout")
