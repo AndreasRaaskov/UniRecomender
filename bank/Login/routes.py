@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from bank import app, conn, bcrypt
 from bank.forms import CustomerLoginForm, EmployeeLoginForm, UniversityForm, ReviewForm,LoginForm
 from flask_login import login_user, current_user, logout_user, login_required
-from bank.models import Customers, Users, select_Customers, select_Employees,select_Users
+from bank.models import Customers, Users, select_Customers, select_Employees,select_Users, get_unis
 from bank.models import select_cus_accounts
 import psycopg2
 #202212
@@ -30,7 +30,7 @@ def home():
     #202212
     role =  mysession["role"]
     print('role: '+ role)
-
+    unis = get_unis
     form = UniversityForm()
 
     return render_template('home.html', form=form, posts=posts, role=role)
@@ -126,9 +126,6 @@ def login():
         
         #cur.close()
         #conn.close()
-        
-
-
 
     #202212
     role =  mysession["role"]
@@ -174,7 +171,7 @@ def account():
 def post_review():
     form = ReviewForm()
     posts = []  # Initialize the variable outside the if statement
-    print(form)
+    #print(form)
     if form.validate_on_submit():
         # Store the review in the database (using appropriate SQL queries or ORM)
         # ...

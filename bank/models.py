@@ -91,6 +91,17 @@ class Transfers(tuple):
         self.amount = user_data[1]
         self.transfer_date = user_data[2]
 
+def get_unis(): 
+    cur = conn.cursor()
+    sql = """
+    SELECT university_name FROM Universities
+    """
+    cur.execute(sql)
+    unis = [x[0] for x in cur.fetchall()] if cur.rowcount > 0 else None;
+    cur.close()
+    print(unis)
+    return unis
+
 def insert_Customers(name, CPR_number, password):
     cur = conn.cursor()
     sql = """

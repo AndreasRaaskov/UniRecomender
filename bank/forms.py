@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField,SelectMultipleField
 from wtforms.validators import DataRequired, Length, EqualTo, ValidationError
+from bank.models import get_unis
 
 
 class UniversityForm(FlaskForm):
-    select = SelectMultipleField('Select Universtity'  , choices=["Uni1","Uni2","Uni3"], validators=[DataRequired()])
+    select = SelectMultipleField('Select Universtity'  , choices=get_unis, validators=[DataRequired()])
     #select = SelectField('From Account:'  , choices=[], coerce = int, validators=[DataRequired()])
     submit = SubmitField('Select')
 
