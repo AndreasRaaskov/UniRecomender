@@ -39,7 +39,10 @@ def home():
 @app.route('/university', methods=['POST'])
 def show_uni():
     university = request.form.get('select')
-    print(university)
+    
+    #Connetct to db
+    conn = get_db_connection()
+    cur = conn.cursor()
     
     form = ReviewForm()
     #form2 = LoginForm()
@@ -53,6 +56,9 @@ def show_uni():
         print(content)
         print(score)
 
+        #SQL command for inserting review
+        cur.execute()
+
     #TODO check if user has logged in and get username
 
     if current_user.is_authenticated:
@@ -62,13 +68,13 @@ def show_uni():
 
 
 
-    #TODO Find rating in DB
-    rating = 4
+    #Sql command for updating rating
+    cur.execute()
 
-    #TODO Find reviews in DB //Find new post in database and get old posts from database.
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute('SELECT r.title AS title, us.username AS user, r.comment AS content, r.rating AS score, r.votes_no AS vote FROM review_of ro JOIN universities u ON ro.university_id = u.id JOIN reviews r ON ro.review_id = r.id JOIN gave_review gr ON ro.review_id = r.id JOIN users us ON gr.user_id = us.id WHERE u.university_name=\'Uni1\';')
+    #Find rating in db
+    rating = cur.execute(f'select u.average_rating from universities as u where u.university_name=\'{university}\';')
+    #get reviews from db
+    cur.execute(f'SELECT r.title AS title, us.username AS user, r.comment AS content, r.rating AS score, r.votes_no AS vote FROM review_of ro JOIN universities u ON ro.university_id = u.id JOIN reviews r ON ro.review_id = r.id JOIN gave_review gr ON ro.review_id = r.id JOIN users us ON gr.user_id = us.id WHERE u.university_name=\'{university}\';')
     posts = cur.fetchall()
     #posts=[{"title": "Test1","user":"Andreas","content": "hay","score": 5,"vote":3},{"title": "Test2","user":"Andreas","content": "hay","score": 4,"vote":3},{"title": "Test3","user":"Andreas","content": "hay","score": 3,"vote":5}]
     
