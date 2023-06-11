@@ -32,7 +32,7 @@ login_manager.login_message_category = 'info'
 #202212
 roles = ["user", "ingen","employee","customer"]
 print(roles)
-mysession = {"state" : "initializing","role" : "Not assingned", "id": 0 ,"age" : 202212}
+mysession = {"state" : "initializing","role" : "Not assingned", "id": 0 ,"age" : 202212, "uni_selected" : ""}
 print(mysession)
 
 from bank.Login.routes import Login

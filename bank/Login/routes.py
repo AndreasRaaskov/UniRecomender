@@ -26,7 +26,6 @@ def home():
     role =  mysession["role"]
     print('role: '+ role)
     form = UniversityForm()
-
     return render_template('home.html', form=form, posts=posts, role=role)
 
 #ARM Select uni
@@ -46,12 +45,14 @@ def show_uni():
         title = form.title.data
         content = form.content.data
         score = form.score.data
+        print(university)
         print(title)
         print(content)
         print(score)
 
         #SQL command for inserting review
-        cur.execute()
+        #insert id below
+        cur.execute(('insert into reviews values (%d, %d, %s, %s, %d)', id, score, content, title, 0))
 
     #TODO check if user has logged in and get username
 
@@ -59,11 +60,6 @@ def show_uni():
         flash('You are logged in!', 'success')
     else:
         flash('Login in order to post a review', 'danger')
-
-
-
-    #Sql command for updating rating
-    cur.execute()
 
     #Find rating in db
     rating = cur.execute(f'select u.average_rating from universities as u where u.university_name=\'{university}\';')
