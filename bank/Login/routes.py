@@ -70,15 +70,6 @@ def show_uni():
 
 
 
-@Login.route("/about")
-def about():
-    #202212
-    mysession["state"]="about"
-    print(mysession)
-    return render_template('about.html', title='About')
-
-
-
 
 @Login.route("/login", methods=['GET', 'POST'])
 def login():
@@ -143,22 +134,6 @@ def logout():
     user_login = None
     logout_user()
     return redirect(url_for('Login.home'))
-
-
-
-@Login.route("/account")
-@login_required
-def account():
-    mysession["state"]="account"
-    print(mysession)
-    role =  mysession["role"]
-    print('role: '+ role)
-
-    accounts = select_cus_accounts(current_user.get_id())
-    print(accounts)
-    return render_template('account.html', title='Account'
-    , acc=accounts, role=role
-    )
 
 
 @app.route('/post_review', methods=['GET', 'POST'])
