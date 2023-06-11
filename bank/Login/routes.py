@@ -51,8 +51,8 @@ def show_uni():
         print(score)
 
         #SQL command for inserting review
-        #insert id below
-#        cur.execute(('insert into reviews values (%d, %d, %s, %s, %d)', id, score, content, title, 0))
+        #insert id below instead of uniID 1
+        cur.execute('insert into reviews values (1, ' + str(score) + ', \'' + content + '\', \'' + title + '\', 0)')
 
     #TODO check if user has logged in and get username
 
