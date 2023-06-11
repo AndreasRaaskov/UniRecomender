@@ -2,16 +2,11 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from bank import app, conn, bcrypt
 from bank.forms import CustomerLoginForm, EmployeeLoginForm, UniversityForm, ReviewForm,LoginForm
 from flask_login import login_user, current_user, logout_user, login_required
-from bank.models import Customers, Users, select_Customers, select_Employees,select_Users, get_unis
-from bank.models import select_cus_accounts
+from bank.models import select_Users, get_unis
 import psycopg2
 #202212
 from bank import roles, mysession
 from flask_login import current_user
-
-
-
-
 
 Login = Blueprint('Login', __name__)
 
@@ -30,7 +25,6 @@ def home():
     #202212
     role =  mysession["role"]
     print('role: '+ role)
-    unis = get_unis
     form = UniversityForm()
 
     return render_template('home.html', form=form, posts=posts, role=role)
@@ -79,15 +73,6 @@ def show_uni():
     #posts=[{"title": "Test1","user":"Andreas","content": "hay","score": 5,"vote":3},{"title": "Test2","user":"Andreas","content": "hay","score": 4,"vote":3},{"title": "Test3","user":"Andreas","content": "hay","score": 3,"vote":5}]
     
     return render_template('university.html', name=university, form=form ,rating=rating , posts=posts)
-
-
-
-@Login.route("/about")
-def about():
-    #202212
-    mysession["state"]="about"
-    print(mysession)
-    return render_template('about.html', title='About')
 
 
 
@@ -155,22 +140,6 @@ def logout():
     user_login = None
     logout_user()
     return redirect(url_for('Login.home'))
-
-
-
-@Login.route("/account")
-@login_required
-def account():
-    mysession["state"]="account"
-    print(mysession)
-    role =  mysession["role"]
-    print('role: '+ role)
-
-    accounts = select_cus_accounts(current_user.get_id())
-    print(accounts)
-    return render_template('account.html', title='Account'
-    , acc=accounts, role=role
-    )
 
 
 @app.route('/post_review', methods=['GET', 'POST'])
