@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS Reviews(
     id INTEGER PRIMARY KEY,
     rating integer NOT NULL CHECK (rating BETWEEN 1 AND 5),
     comment varchar(500),
-    votes_no INTEGER DEFAULT 0,
-    title VARCHAR(100)
+    title VARCHAR(100),
+    votes_no INTEGER DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS gave_review (

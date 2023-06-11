@@ -174,7 +174,7 @@ def account():
 def post_review():
     form = ReviewForm()
     posts = []  # Initialize the variable outside the if statement
-    
+    print(form)
     if form.validate_on_submit():
         # Store the review in the database (using appropriate SQL queries or ORM)
         # ...
